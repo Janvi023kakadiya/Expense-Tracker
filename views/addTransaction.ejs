@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Styles */
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 600px; 
+  }
+  
+  /* Form Container */
+  .form-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Form */
+  .transaction-form {
+    width: 100%;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+  
+  .form-input,
+  .form-input-file {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .form-input-file {
+    padding: 10px;
+  }
+  
+  .form-input:focus {
+    outline: none;
+    border-color: #007bff; 
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  }
+  
+ 
+  
+  /* Submit Button */
+  .submit-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #28a745; 
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-btn:hover {
+    background-color: #218838; 
+  }
+  
+  .submit-btn i {
+    margin-right: 5px;
+  }
+  
+  /* Icons */
+  .form-label i {
+    margin-right: 5px;
+  }
+  
+  /* Media Queries for Responsiveness */
+  @media (max-width: 500px) {
+    .container {
+        max-width: 95%;
+    }
+  
+    .form-input, .form-input-file {
+        font-size: 14px;
+    }
+  }
+  
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1 class="form-title">Add Transaction</h1>
+            <form action="/addTransaction" method="post" enctype="multipart/form-data" class="transaction-form">
+                <div class="form-group">
+                    <label for="title" class="form-label"><i class="fas fa-tag"></i> Title:</label>
+                    <input type="text" id="title" name="title" class="form-input" placeholder="Enter transaction title" required>
+                </div>
+                <div class="form-group">
+                    <label for="description" class="form-label"><i class="fas fa-pencil-alt"></i> Description:</label>
+                    <textarea id="description" name="description" class="form-input" placeholder="Enter transaction description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="amount" class="form-label"><i class="fas fa-dollar-sign"></i> Amount:</label>
+                    <input type="number" id="amount" name="amount" class="form-input" placeholder="Enter amount" required>
+                </div>
+                <div class="form-group">
+                    <label for="category" class="form-label"><i class="fas fa-list"></i> Category:</label>
+                    <select id="category" name="category" class="form-input">
+                        <option value="Food">Food</option>
+                        <option value="Rent">Rent</option>
+                        <option value="Salary">Salary</option>
+                        <option value="Other">Other</option> 
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date" class="form-label"><i class="fas fa-calendar-alt"></i> Date:</label>
+                    <input type="date" id="date" name="date" class="form-input" value="<?php echo date('Y-m-d'); ?>" required>
+                </div>
+                <div class="form-group">
+                    <label for="logo" class="form-label"><i class="fas fa-image"></i> Upload Image (Optional):</label>
+                    <input type="file" id="logo" name="logo" class="form-input-file">
+                </div>
+
+                <div class="form-group"> 
+                    <label for="paymentMethod" class="form-label"><i class="fas fa-credit-card"></i> Payment Method:</label>
+                    <input type="text" id="paymentMethod" name="paymentMethod" class="form-input" placeholder="Enter payment method" required> 
+                </div>
+
+                <div class="form-group">
+                    <label for="transactionType" class="form-label"><i class="fas fa-exchange-alt"></i> Transaction Type:</label>
+                    <input type="text" id="transactionType" name="transactionType" class="form-input" placeholder="Enter transaction type" required> 
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="submit-btn"><i class="fas fa-plus-circle"></i> Add Transaction</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('date').valueAsDate = new Date();
+    </script>
+</body>
+</html>

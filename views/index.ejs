@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa; 
+            display: flex;
+            flex-direction: column; 
+            min-height: 100vh;    
+        }
+        
+        .container {
+            max-width: 1000px; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+            background-color: #fff; 
+            padding: 30px;
+            border-radius: 8px; 
+            margin: auto;
+            flex-grow: 1;  
+        }
+        
+        /* Table Styles */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem; 
+            color: #212529; 
+        }
+        
+        .table th, .table td {
+            padding: 0.75rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6; 
+            text-align: left; 
+        }
+        
+        .table th {
+            font-weight: 600; 
+            background-color: #f8f9fa; 
+        }
+        
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(0, 0, 0, 0.05); 
+        }
+        
+        .img-thumbnail {
+            max-width: 70px;
+            height: auto; 
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem; 
+            border-radius: 0.25rem;
+        }
+        
+        .btn-success {
+            color: #fff;
+            background-color: #28a745; 
+            border-color: #28a745; 
+        }
+        
+        .btn-warning {
+            color: #fff; 
+            background-color: #ffc107;
+            border-color: #ffc107; 
+        }
+        
+        .btn-danger {
+            color: #fff;
+            background-color: #dc3545;
+            border-color: #dc3545; 
+        }
+        
+        /* Icons */
+        i {
+            margin-right: 5px; 
+        }
+
+    </style> 
+</head>
+<body>
+    <div class="container"> 
+        <h1 class="text-center mt-4 mb-4"> <i class="fas fa-wallet"></i> My Expense Tracker</h1> 
+        <div class="table-responsive"> 
+            <table class="table table-striped">
+                <thead>
+                    <tr class="bg-dark text-light">
+                        <th scope="col">#</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Actions</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <% transactionData.map((item, index) => { %>
+                        <tr> 
+                            <td scope="row"><%= index + 1 %></td>
+                            <td><%= item.title %></td>
+                            <td>
+                                <% if(item.path){ %>
+                                    <img src="<%= item.path %>" alt="<%= item.title %> - Image" class="img-thumbnail"> 
+                                <% }else{ %>
+                                    <img src="/images/noImage.jpg" alt="No Image" class="img-thumbnail"> 
+                                <% } %>
+                            </td>
+                            <td><%= item.description %></td>
+                            <td>₹<%= item.amount %></td>
+                            <td><%= item.category %></td>
+                            <td><%= new Date(item.date).toLocaleDateString('en-IN') %></td>
+                            <td>
+                                <a href="/edit/<%= item.id %>" class="btn btn-sm btn-warning">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                                <a href="/delete/<%= item._id %>" class="btn btn-sm btn-danger">
+                                    <i class="fas fa-trash-alt"></i> Delete 
+                                </a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+            <a href="/add" class="btn btn-success float-end"> 
+                <i class="fas fa-plus-circle"></i> Add New Transaction
+            </a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
